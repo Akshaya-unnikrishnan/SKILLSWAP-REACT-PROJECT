@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto Condensed", sans-serif;
+    
+}
+body{
+    background-image: linear-gradient(rgba(10,10,12,0.27), rgba(15,14,12,0.47)), url('https://img.magnific.com/premium-photo/unlocking-professional-skills-career-growth-with-digital-technology_1101054-87065.jpg?semt=ais_hybrid&w=740&q=80');
+    /* background-image: linear-gradient(rgba(10,10,12,0.87), rgba(10,10,12,0.47)), url('https://media.istockphoto.com/id/1388635225/photo/businessman-click-on-skills.jpg?s=612x612&w=0&k=20&c=lsCABr8nyaj9E2gFnAuo5V0V_JnGz4d43IZVheP7eoo='); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    /* to increase the height of background image */
+    min-height: 100vh;
+}
