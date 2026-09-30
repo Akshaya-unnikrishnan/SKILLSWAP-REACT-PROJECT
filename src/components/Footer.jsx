@@ -8,7 +8,7 @@ import { MdOutlineCopyright } from "react-icons/md";
 function Footer() {
   return (
     <>
-     <div className="bg-dark text-light  mt-5">
+     <div className="bg-dark text-light p-4 mt-5">
       <h3 className='text-center '>SkillSwap <br /> <img src="/ss-logo.png" alt=""width="60"height="40"/></h3>
       <h5 className='text-center mt-2 '>Learn • Share • Grow</h5>
       <p className='text-center mt-5'><FaGithub className="mx-2" size={22} /> <FaLinkedin  className="mx-2" size={22}/> <FaInstagram  className="mx-2" size={22}/> <FaEnvelope className="mx-2" size={22} /></p>
