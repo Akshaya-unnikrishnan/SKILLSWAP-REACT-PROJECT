@@ -58,3 +58,7 @@ const [user, setUser] = useState(
 }
 
 export default App
+// user is to store current user login info
+// setuser to update that state
+// get the loggeinuser info from localstorage which is stored initially..then convert it in to javascript obj(bcz in localstorage everything will be in string format) using parse..then data is stored in user using usestate
+// {setuser} is passed- bcz after a successful login the login component tells the app.jsx the user has loggedin and it acn change the navigatn according to it

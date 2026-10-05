@@ -15,3 +15,6 @@ createRoot(document.getElementById('root')).render(
     </BrowserRouter>
   </StrictMode>,
 )
+// strictmode-identify potential pblm while development phase
+// ?createroot creates react root where  ur react appln will be rendered
+// browserrouter - enable client side routing(routing funtionality to entire appln)
