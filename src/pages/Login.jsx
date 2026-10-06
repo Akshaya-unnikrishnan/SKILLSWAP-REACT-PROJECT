@@ -43,33 +43,48 @@ function Login({ setUser }) {
     toast.error("Something went wrong!")
   }
 }
-  return (
-    <div className='d-flex justify-content-center align-items-center '>
-        <div className="m-5 container-sm p-3" style={{maxWidth:'400px', backgroundColor: "rgba(255,255,255,0.95)", borderRadius: "20px"}}>
-         <div className="text-center mb-4"> 
-            <h2 className="fw-bold mb-2"><FaUser />Welcome Back </h2> 
-            <p className="text-muted mb-0"> Login to continue to SkillSwap </p> 
-         </div>
-      <form onSubmit={handleLogin}>
- <div className="mb-3">
-    <input className='form-control'type="email"name="email"placeholder="Enter your email"
-          value={loginDetails.email} onChange={handleChange}/>
- </div>
- <div className="mb-4">
-    <input className='form-control'type="password"name="password"placeholder="Enter your password"
-          value={loginDetails.password} onChange={handleChange}/>
- </div>
-<div className="d-flex justify-content-center  ">
-    <button className='btn text-light w-75' type="submit" style={{backgroundColor:'rgba(123, 124, 135, 0.9)'}}>Login</button>
-</div>
-<div className="text-center mt-4"> 
-    <span className="text-muted"> Don't have an account? </span> 
-    <button type="button" className="btn btn-link text-decoration-none fw-semibold" onClick={() => navigate("/register")} > Register </button> 
-</div>
-      </form>
+return (
+  <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh", backgroundColor: "#0d0d0d", padding: "20px" }}>
+    <div className="p-4" style={{ width: "100%", maxWidth: "400px", backgroundColor: "#ffffff", borderRadius: "20px", boxShadow: "0 10px 35px rgba(0,0,0,0.4)" }}>
+
+      {/* Heading */}
+      <div className="text-center mb-4">
+        <div className="d-flex justify-content-center align-items-center mx-auto mb-3" style={{ width: "55px", height: "55px", borderRadius: "50%", backgroundColor: "#eeeeee" }}>
+          <FaUser size={22} />
+        </div>
+
+        <h2 className="fw-bold mb-2">Welcome Back</h2>
+        <p className="text-muted mb-0">Login to continue to SkillSwap</p>
       </div>
+
+      {/* Login Form */}
+      <form onSubmit={handleLogin}>
+
+        {/* Email */}
+        <div className="mb-3">
+          <input className="form-control" type="email" name="email" placeholder="Enter your email" value={loginDetails.email} onChange={handleChange} />
+        </div>
+
+        {/* Password */}
+        <div className="mb-4">
+          <input className="form-control" type="password" name="password" placeholder="Enter your password" value={loginDetails.password} onChange={handleChange} />
+        </div>
+
+        {/* Login Button */}
+        <button className="btn text-light w-100 fw-semibold" type="submit" style={{ backgroundColor: "#151515", borderRadius: "8px", padding: "10px" }}>
+          Login
+        </button>
+
+        {/* Register */}
+        <div className="text-center mt-4">
+          <span className="text-muted">Don't have an account?</span>
+          <button type="button" className="btn btn-link text-decoration-none fw-semibold p-0 ms-1" onClick={() => navigate("/register")}>Register</button>
+        </div>
+
+      </form>
     </div>
-  )
+  </div>
+)
 }
 
 export default Login

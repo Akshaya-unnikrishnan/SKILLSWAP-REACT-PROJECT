@@ -69,31 +69,50 @@ const handleSendMessage = async () => {
 }
 
   return (
-    <div className="container mt-4 text-light">
-      <h2 className="text-center">Chat with {user.name}</h2>
-      <div className="container-sm mt-4 p-3 rounded"style={{backgroundColor: "rgba(10, 10, 12, 0.85)",minHeight: "400px",maxWidth:'600px'}}>
-        {messages.length === 0 ? (<p className="text-center mt-5">No messages yet. Start the conversation!</p>) 
-                  :(messages.map((message) => (
-            <div key={message.id} className={message.senderId === loggedInUser?.id? "text-end mb-3": "text-start mb-3"}>
-              <span className="badge bg-primary p-2">{message.message}</span>
+  <div className="container py-4 text-light" style={{ minHeight: "100vh" }}>
+
+    <h2 className="text-center mb-4">Chat with {user.name}</h2>
+
+    <div className="container-sm p-3 rounded" style={{ backgroundColor: "rgba(10, 10, 12, 0.85)", height: "500px", maxWidth: "600px", display: "flex", flexDirection: "column" }}>
+
+      {/* Messages */}
+      <div style={{ flex: 1, overflowY: "auto", padding: "10px" }}>
+
+        {messages.length === 0 ? (
+          <p className="text-center mt-5 text-secondary">No messages yet. Start the conversation!</p>
+        ) : (
+          messages.map((message) => (
+            <div key={message.id} className={message.senderId === loggedInUser?.id ? "text-end mb-3" : "text-start mb-3"}>
+
+              <span className={message.senderId === loggedInUser?.id ? "badge bg-primary p-2" : "badge bg-secondary p-2"} style={{ fontSize: "14px", whiteSpace: "normal" }}>
+                {message.message}
+              </span>
+
             </div>
           ))
         )}
-        {/* chatbox */}
-  <div className="d-flex mt-3 gap-2">
-  <input type="text"className="form-control"placeholder="Type a message..."value={newMessage}
-    onChange={(e) => setNewMessage(e.target.value)}
-    onKeyDown={(e) => {
-      if (e.key === "Enter") {
-        handleSendMessage();
-      }}}
-  />
-  <button className="btn btn-primary mb-0"onClick={handleSendMessage}>< IoSendSharp/></button>
-</div>
+
       </div>
+
+      {/* Message Input */}
+      <div className="d-flex gap-2 mt-2">
+
+        <input type="text" className="form-control" placeholder="Type a message..." value={newMessage} onChange={(e) => setNewMessage(e.target.value)} onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            handleSendMessage();
+          }
+        }} />
+
+        <button className="btn btn-primary" onClick={handleSendMessage}>
+          <IoSendSharp />
+        </button>
+
+      </div>
+
     </div>
-    
-  )
+
+  </div>
+)
 }
 
 export default Chat

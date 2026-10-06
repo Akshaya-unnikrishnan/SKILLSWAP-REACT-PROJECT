@@ -68,39 +68,82 @@ const handleAccept = async (request) => {
   }}
 
   return (
-    <div className="container mt-4 text-light">
-      <h1 className="text-center">Skill Requests</h1>
-      <p className="text-center">Requests you have received</p>
-      {receivedRequests.length === 0 ? (<h5 className="text-center mt-5">No pending requests </h5>) : (
+  <div className="container py-5 text-light" style={{ minHeight: "100vh" }}>
 
-        <div className="row">
-          {receivedRequests.map((request) => {
-            const sender = users.find((user) => user.id === request.senderId)
-            return (
-              <div className="col-md-6 mb-4"key={request.id}>
-                <Card variant="outlined"style={{backgroundColor: "rgba(215, 225, 226, 0.95)"}}>
-  <CardContent>
-    <Typography gutterBottom sx={{color: "text.secondary",fontSize: 14}}>Skill Request</Typography>
-    <Typography variant="h5"component="div">{sender?.name}</Typography>
-    <Typography sx={{color: "text.secondary",mb: 1.5}}>{sender?.location}</Typography>
-    <Typography variant="body2">{sender?.bio}</Typography>
-    <Typography variant="body2"sx={{ mt: 2 }}>wants to exchange skills with you.</Typography>
-  </CardContent>
-  <CardActions>
-    <Button size="small"variant="contained"color="success"onClick={() => handleAccept(request)}>
-      Accept
-    </Button>
-    <Button size="small"variant="contained"color="error" onClick={() => handleReject(request.id)}>
-      Reject
-    </Button>
-  </CardActions>
-</Card>
-              </div>
-            )
-          })}
-        </div>
-      )}
+    {/* Heading */}
+    <div className="text-center mb-5">
+      <h1 className="fw-bold mb-2">Skill Requests</h1>
+      <p className="text-secondary">Requests you have received</p>
     </div>
-  )}
+
+    {/* No Requests */}
+    {receivedRequests.length === 0 ? (
+      <div className="text-center py-5 mx-auto" style={{ maxWidth: "500px", backgroundColor: "#171717", borderRadius: "20px", border: "1px solid #2d2d2d" }}>
+
+        <h5 className="fw-semibold">No pending requests</h5>
+        <p className="text-secondary mb-0">New skill requests will appear here.</p>
+
+      </div>
+    ) : (
+
+      <div className="row g-4">
+        {receivedRequests.map((request) => {
+
+          const sender = users.find((user) => user.id === request.senderId);
+
+          return (
+            <div className="col-md-6 col-lg-4" key={request.id}>
+
+              <div className="h-100 p-4" style={{ backgroundColor: "#ffffff", color: "#111111", borderRadius: "18px", boxShadow: "0 8px 25px rgba(0,0,0,0.25)" }}>
+
+                {/* Sender */}
+                <div className="d-flex align-items-center mb-3">
+
+                  <div className="d-flex align-items-center justify-content-center fw-bold me-3" style={{ width: "52px", height: "52px", borderRadius: "50%", backgroundColor: "#111111", color: "#ffffff", fontSize: "19px" }}>
+                    {sender?.name?.charAt(0).toUpperCase()}
+                  </div>
+
+                  <div>
+                    <h5 className="fw-bold mb-1">{sender?.name}</h5>
+                    <div className="text-secondary" style={{ fontSize: "13px" }}>📍 {sender?.location || "Location not provided"}</div>
+                  </div>
+
+                </div>
+
+                {/* Bio */}
+                <p className="text-secondary mb-3" style={{ fontSize: "14px", lineHeight: "1.6" }}>
+                  {sender?.bio || "No bio available."}
+                </p>
+
+                {/* Request Message */}
+                <p className="mb-4" style={{ fontSize: "14px" }}>
+                  wants to exchange skills with you.
+                </p>
+
+                {/* Actions */}
+                <div className="d-flex gap-2">
+
+                  <button className="btn flex-grow-1 fw-semibold" style={{ backgroundColor: "#111111", color: "#ffffff", borderRadius: "8px" }} onClick={() => handleAccept(request)}>
+                    Accept
+                  </button>
+
+                  <button className="btn flex-grow-1 fw-semibold" style={{ backgroundColor: "#eeeeee", color: "#111111", border: "1px solid #dddddd", borderRadius: "8px" }} onClick={() => handleReject(request.id)}>
+                    Reject
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+          );
+        })}
+      </div>
+
+    )}
+
+  </div>
+)
+}
 
 export default Requests

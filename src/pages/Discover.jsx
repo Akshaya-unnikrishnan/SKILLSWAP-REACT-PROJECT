@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 import { IoSearch } from "react-icons/io5";
 import { MdCardMembership } from "react-icons/md";
-
+import { FaMapMarkerAlt } from "react-icons/fa";
 
 function Discover() {
   // to navigate to user profile (view profile)
@@ -74,62 +74,74 @@ function Discover() {
   });
 
   return (
-    <div className="container text-light">
-      <h1 className="text-center mt-4"> Discover</h1>
-      <p className="text-center mb-4">
-        <IoSearch /> Find people and exchange skills.
-      </p>
-      {/* search */}
-      <div className="mb-4">
-        <IoSearch /><input type="text" className="form-control w-25" placeholder="Search by name or location or skills..." value={search} onChange={(e) => setSearch(e.target.value)} />
-      </div>
-      <div className="row">
-        {filteredUsers.map((user) => {
-          // finding the actual skill objs using skill id's
-          const teachSkills = skills.filter((skill) =>
-            user.teachSkills.includes(skill.id)
-          )
-          const learnSkills = skills.filter((skill) =>
-            user.learnSkills.includes(skill.id)
-          )
-          return (
-            <div className="col-md-4 mb-4" key={user.id}>
-              <Card variant="outlined" style={{ backgroundColor: "rgba(215, 225, 226, 0.95)" }}>
-                <CardContent>
-                  <Typography gutterBottom sx={{color: "text.secondary",fontSize: 14}}>
-                    <MdCardMembership />  SkillSwap Member
-                  </Typography>
-                  <Typography variant="h5"component="div">
-                    {user.name}
-                  </Typography>
-                  <Typography sx={{color: "text.secondary", mb: 1.5}}>
-                    {user.location}
-                  </Typography>
-                  <Typography variant="body2">
-                    {user.bio}
-                  </Typography>
+  <div className="container py-5 text-light" style={{ minHeight: "100vh" }}>
 
-                  {/* skills that the user can teach */}
-                  <Typography variant="body2"sx={{ mt: 2 }}>
-                    <strong>Can Teach:</strong>{" "}
-                    {teachSkills.length > 0 ? teachSkills.map((skill) => skill.name).join(", "): "No skills added"}
-                  </Typography>
+    {/* Heading */}
+    <div className="text-center mb-4">
+      <h1 className="fw-bold">Discover</h1>
+      <p className="text-secondary"><IoSearch className="me-2" />Find people and exchange skills.</p>
+    </div>
 
-                  {/* skills that the user wants to learn */}
-                  <Typography variant="body2"sx={{ mt: 1 }}>
-                    <strong>Wants to Learn:</strong>{" "}
-                    {learnSkills.length > 0? learnSkills.map((skill) => skill.name).join(", "): "No skills added"}
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small" onClick={() => navigate(`/user-profile/${user.id}`)}>View Profile</Button>
-                </CardActions>
-              </Card>
-            </div>
-          )
-        })}
+    {/* Search */}
+    <div className="d-flex justify-content-center mb-5">
+      <div className="d-flex align-items-center px-3" style={{ backgroundColor: "#ffffff", borderRadius: "10px", width: "100%", maxWidth: "600px", height: "45px" }}>
+        <IoSearch size={20} style={{ color: "#777" }} className="me-2" />
+        <input type="text" className="form-control border-0 shadow-none" placeholder="Search by name, location or skill..." value={search} onChange={(e) => setSearch(e.target.value)} />
       </div>
     </div>
-  )
+
+    {/* Users */}
+    <div className="row g-4">
+      {filteredUsers.map((user) => {
+        return (
+          <div className="col-md-6 col-lg-4" key={user.id}>
+
+            <div className="h-100 p-4" style={{ backgroundColor: "#ffffff", color: "#111111", borderRadius: "18px", boxShadow: "0 8px 25px rgba(0,0,0,0.25)" }}>
+
+              {/* Profile Header */}
+              <div className="d-flex align-items-center mb-3">
+
+                <div className="d-flex align-items-center justify-content-center fw-bold me-3" style={{ width: "52px", height: "52px", borderRadius: "50%", backgroundColor: "#111111", color: "#ffffff", fontSize: "19px" }}>
+                  {user.name?.charAt(0).toUpperCase()}
+                </div>
+
+                <div>
+                  <h5 className="fw-bold mb-1">{user.name}</h5>
+
+                  <div className="text-secondary d-flex align-items-center" style={{ fontSize: "13px" }}>
+                    <FaMapMarkerAlt className="me-1" size={12} />
+                    {user.location || "Location not provided"}
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Bio */}
+              <p className="text-secondary mb-4" style={{ fontSize: "14px", lineHeight: "1.6" }}>
+                {user.bio || "No bio available."}
+              </p>
+
+              {/* Button */}
+              <button className="btn w-100 fw-semibold" style={{ backgroundColor: "#111111", color: "#ffffff", borderRadius: "8px", padding: "9px" }} onClick={() => navigate(`/user-profile/${user.id}`)}>
+                View Profile
+              </button>
+
+            </div>
+
+          </div>
+        );
+      })}
+    </div>
+
+    {/* No Results */}
+    {filteredUsers.length === 0 && (
+      <div className="text-center mt-5">
+        <h5>No people found</h5>
+        <p className="text-secondary">Try another name, location or skill.</p>
+      </div>
+    )}
+
+  </div>
+)
 }
 export default Discover
